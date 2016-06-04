@@ -3,8 +3,13 @@ function $getJSONP(url, callback) {
     if (typeof(callback) === 'function') {
         // 如果回调是函数类型
         isTempFunction = true;
-        // 取得随机函数名
-        callbackName = getRandomName(12);
+        // 如果存在有名函数
+        if (callback.name) {
+            callbackName = callback.name;
+        } else {
+            // 取得随机函数名
+            callbackName = getRandomName(12);
+        }
         // 挂载于window对象下
         window[callbackName] = callback;
     } else if (typeof(callback) === 'string') {
